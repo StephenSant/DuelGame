@@ -11,6 +11,7 @@ public class AttackAndBlock : MonoBehaviour
     public float stabForce = 10;
     public float stabSlowdown;
     public float stabPower;
+    public float stabDir;
     [Header("Block")]
     public GameObject blockCol;
     public float blockSpeed = 2;
@@ -40,6 +41,7 @@ public class AttackAndBlock : MonoBehaviour
         {
             stabCol.active = true;
             stabPower = stabForce;
+            stabDir = transform.rotation.y;
         }
         stabPower -= stabSlowdown;
         if (stabPower < 0)
@@ -51,8 +53,7 @@ public class AttackAndBlock : MonoBehaviour
         #region Block
         if (Input.GetKey(KeyCode.S)&&stabPower<=0)
         {
-            blockCol.active = true;
-            player.slowdownSpeed = blockSpeed;
+            Block();
         }
         else
         {
@@ -70,5 +71,10 @@ public class AttackAndBlock : MonoBehaviour
             swipeCol.active = false;
         }
         #endregion
+    }
+    void Block()
+    {
+        blockCol.active = true;
+        player.slowdownSpeed = blockSpeed;
     }
 }

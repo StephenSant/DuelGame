@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     #region Variables
-    [Header ("Movement")]
+    [Header("Movement")]
     public float moveSpeed = 2.5f;
     public float jumpHeight = 4;
     public float slowdownSpeed = 2;
@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public Rigidbody rb;
     Vector3 spawnPoint;
     public AttackAndBlock attackScript;
+    public Transform target;
     #endregion
 
     // Use this for initialization
@@ -37,12 +38,13 @@ public class PlayerController : MonoBehaviour
         }
         #endregion
         #region Movement
-        rb.velocity = (new Vector3((Input.GetAxisRaw("Horizontal") * (moveSpeed * 100) * Time.deltaTime + attackScript.stabPower) / slowdownSpeed, rb.velocity.y, 0));
+        rb.velocity = (new Vector3((Input.GetAxisRaw("Horizontal") * (moveSpeed * 100) * Time.deltaTime + (attackScript.stabPower * (attackScript.stabDir / 90) * 100)) / slowdownSpeed, rb.velocity.y, 0));
         if (Input.GetButton("Jump") && grounded)
         {
-            rb.velocity = (new Vector3(rb.velocity.x,(jumpHeight * 100) * Time.deltaTime, 0));
+            rb.velocity = (new Vector3(rb.velocity.x, (jumpHeight * 100) * Time.deltaTime, 0));
         }
         #endregion
         if (transform.position.y < -10) { transform.position = spawnPoint; }
+        transform.LookAt(new Vector3(target.position.x, transform.position.y, 0));
     }
 }
