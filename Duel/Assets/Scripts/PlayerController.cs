@@ -8,15 +8,18 @@ public class PlayerController : MonoBehaviour
     [Header ("Movement")]
     public float moveSpeed = 2.5f;
     public float jumpHeight = 4;
+    public float slowdownSpeed = 2;
     public bool grounded;
     public Rigidbody rb;
     Vector3 spawnPoint;
+    public AttackAndBlock attackScript;
     #endregion
 
     // Use this for initialization
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        attackScript = GetComponent<AttackAndBlock>();
         spawnPoint = transform.position;
     }
 
@@ -34,7 +37,7 @@ public class PlayerController : MonoBehaviour
         }
         #endregion
         #region Movement
-        rb.velocity = (new Vector3(Input.GetAxisRaw("Horizontal") * (moveSpeed * 100) * Time.deltaTime, rb.velocity.y, 0));
+        rb.velocity = (new Vector3((Input.GetAxisRaw("Horizontal") * (moveSpeed * 100) * Time.deltaTime + attackScript.stabPower) / slowdownSpeed, rb.velocity.y, 0));
         if (Input.GetButton("Jump") && grounded)
         {
             rb.velocity = (new Vector3(rb.velocity.x,(jumpHeight * 100) * Time.deltaTime, 0));
