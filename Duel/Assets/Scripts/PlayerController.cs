@@ -38,8 +38,8 @@ public class PlayerController : MonoBehaviour
         }
         #endregion
         #region Movement
-        rb.velocity = (new Vector3((Input.GetAxisRaw("Horizontal") * (moveSpeed * 100) * Time.deltaTime + (attackScript.stabPower * (attackScript.stabDir / 90) * 100)) / slowdownSpeed, rb.velocity.y, 0));
-        if (Input.GetButton("Jump") && grounded)
+        rb.velocity = (new Vector3((Input.GetAxisRaw("Horizontal" + attackScript.whichPlayer) * (moveSpeed * 100) * Time.deltaTime + (attackScript.stabPower * (attackScript.stabDir / 90) * 100)) / slowdownSpeed, rb.velocity.y, 0));
+        if (Input.GetButton("Jump" + attackScript.whichPlayer) && grounded)
         {
             rb.velocity = (new Vector3(rb.velocity.x, (jumpHeight * 100) * Time.deltaTime, 0));
         }

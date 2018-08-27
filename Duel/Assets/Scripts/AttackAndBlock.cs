@@ -6,6 +6,7 @@ public class AttackAndBlock : MonoBehaviour
 {
     #region Variables
     public PlayerController player;
+    public int whichPlayer;
     [Header("Stab")]
     public GameObject stabCol;
     public float stabForce = 10;
@@ -18,16 +19,16 @@ public class AttackAndBlock : MonoBehaviour
     [Header("Swipe")]
     public GameObject swipeCol;
 
-    
+
     #endregion
 
     // Use this for initialization
     void Start()
     {
         player = GetComponent<PlayerController>();
-        stabCol = GameObject.Find("StabCol");
-        blockCol = GameObject.Find("BlockCol");
-        swipeCol = GameObject.Find("SwipeCol");
+        stabCol = GameObject.Find("StabCol" + whichPlayer);
+        blockCol = GameObject.Find("BlockCol" + whichPlayer);
+        swipeCol = GameObject.Find("SwipeCol" + whichPlayer);
         stabCol.active = false;
         blockCol.active = false;
         swipeCol.active = false;
@@ -37,7 +38,7 @@ public class AttackAndBlock : MonoBehaviour
     void Update()
     {
         #region Stab
-        if (Input.GetKeyDown(KeyCode.Mouse1) && !Input.GetKey(KeyCode.S)&& !Input.GetKey(KeyCode.Mouse0))
+        if (Input.GetButtonDown("Stab" + whichPlayer) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.Mouse0))
         {
             stabCol.active = true;
             stabPower = stabForce;
@@ -51,7 +52,7 @@ public class AttackAndBlock : MonoBehaviour
         }
         #endregion
         #region Block
-        if (Input.GetKey(KeyCode.S)&&stabPower<=0)
+        if (Input.GetButton("Block" + whichPlayer) && stabPower <= 0)
         {
             Block();
         }
@@ -62,7 +63,7 @@ public class AttackAndBlock : MonoBehaviour
         }
         #endregion
         #region Swipe
-        if (Input.GetKeyDown(KeyCode.Mouse0) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.Mouse1))
+        if (Input.GetButtonDown("Swipe" + whichPlayer) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.Mouse1))
         {
             swipeCol.active = true;
         }
