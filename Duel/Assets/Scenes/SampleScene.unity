@@ -192,7 +192,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4661896274178912, guid: 31ef257954123dc45a61d85947f362d1, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4661896274178912, guid: 31ef257954123dc45a61d85947f362d1, type: 2}
       propertyPath: m_LocalPosition.z
@@ -231,6 +231,34 @@ Prefab:
         type: 2}
       propertyPath: rb
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1701131967809256, guid: 31ef257954123dc45a61d85947f362d1, type: 2}
+      propertyPath: m_TagString
+      value: Player1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1518597210418758, guid: 31ef257954123dc45a61d85947f362d1, type: 2}
+      propertyPath: m_TagString
+      value: Player1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1813789680016926, guid: 31ef257954123dc45a61d85947f362d1, type: 2}
+      propertyPath: m_TagString
+      value: Player1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179927857859756, guid: 31ef257954123dc45a61d85947f362d1, type: 2}
+      propertyPath: m_TagString
+      value: Player1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1813789680016926, guid: 31ef257954123dc45a61d85947f362d1, type: 2}
+      propertyPath: m_Name
+      value: BlockCol
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179927857859756, guid: 31ef257954123dc45a61d85947f362d1, type: 2}
+      propertyPath: m_Name
+      value: StabCol
+      objectReference: {fileID: 0}
+    - target: {fileID: 1518597210418758, guid: 31ef257954123dc45a61d85947f362d1, type: 2}
+      propertyPath: m_Name
+      value: SwipeCol
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31ef257954123dc45a61d85947f362d1, type: 2}
@@ -330,7 +358,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4661896274178912, guid: 31ef257954123dc45a61d85947f362d1, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4661896274178912, guid: 31ef257954123dc45a61d85947f362d1, type: 2}
       propertyPath: m_LocalPosition.z
@@ -382,20 +410,36 @@ Prefab:
       objectReference: {fileID: 635978863}
     - target: {fileID: 1179927857859756, guid: 31ef257954123dc45a61d85947f362d1, type: 2}
       propertyPath: m_Name
-      value: StabCol2
+      value: StabCol
       objectReference: {fileID: 0}
     - target: {fileID: 1813789680016926, guid: 31ef257954123dc45a61d85947f362d1, type: 2}
       propertyPath: m_Name
-      value: BlockCol2
+      value: BlockCol
       objectReference: {fileID: 0}
     - target: {fileID: 1518597210418758, guid: 31ef257954123dc45a61d85947f362d1, type: 2}
       propertyPath: m_Name
-      value: SwipeCol2
+      value: SwipeCol
       objectReference: {fileID: 0}
     - target: {fileID: 114037556170707554, guid: 31ef257954123dc45a61d85947f362d1,
         type: 2}
       propertyPath: rb
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1701131967809256, guid: 31ef257954123dc45a61d85947f362d1, type: 2}
+      propertyPath: m_TagString
+      value: Player2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1518597210418758, guid: 31ef257954123dc45a61d85947f362d1, type: 2}
+      propertyPath: m_TagString
+      value: Player2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1813789680016926, guid: 31ef257954123dc45a61d85947f362d1, type: 2}
+      propertyPath: m_TagString
+      value: Player2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179927857859756, guid: 31ef257954123dc45a61d85947f362d1, type: 2}
+      propertyPath: m_TagString
+      value: Player2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31ef257954123dc45a61d85947f362d1, type: 2}

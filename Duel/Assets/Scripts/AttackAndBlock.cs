@@ -26,9 +26,9 @@ public class AttackAndBlock : MonoBehaviour
     void Start()
     {
         player = GetComponent<PlayerController>();
-        stabCol = GameObject.Find("StabCol" + whichPlayer);
-        blockCol = GameObject.Find("BlockCol" + whichPlayer);
-        swipeCol = GameObject.Find("SwipeCol" + whichPlayer);
+        stabCol = GameObject.Find("StabCol");
+        blockCol = GameObject.Find("BlockCol");
+        swipeCol = GameObject.Find("SwipeCol");
         stabCol.active = false;
         blockCol.active = false;
         swipeCol.active = false;
@@ -43,6 +43,7 @@ public class AttackAndBlock : MonoBehaviour
             stabCol.active = true;
             stabPower = stabForce;
             stabDir = transform.rotation.y;
+            
         }
         stabPower -= stabSlowdown;
         if (stabPower < 0)
@@ -54,7 +55,8 @@ public class AttackAndBlock : MonoBehaviour
         #region Block
         if (Input.GetButton("Block" + whichPlayer) && stabPower <= 0)
         {
-            Block();
+            blockCol.active = true;
+            player.slowdownSpeed = blockSpeed;
         }
         else
         {
@@ -72,10 +74,5 @@ public class AttackAndBlock : MonoBehaviour
             swipeCol.active = false;
         }
         #endregion
-    }
-    void Block()
-    {
-        blockCol.active = true;
-        player.slowdownSpeed = blockSpeed;
     }
 }

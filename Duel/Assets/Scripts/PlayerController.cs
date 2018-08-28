@@ -47,4 +47,11 @@ public class PlayerController : MonoBehaviour
         if (transform.position.y < -10) { transform.position = spawnPoint; }
         transform.LookAt(new Vector3(target.position.x, transform.position.y, 0));
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.name == "StabCol" && other.tag ==target.tag)
+        {
+            transform.position = new Vector3 (15,2,0);
+        }
+    }
 }
