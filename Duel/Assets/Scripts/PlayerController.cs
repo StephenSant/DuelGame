@@ -9,11 +9,13 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 2.5f;
     public float jumpHeight = 4;
     public float slowdownSpeed = 2;
+    public float knockbackForce = 10;
     public bool grounded;
     public Rigidbody rb;
     Vector3 spawnPoint;
     public AttackAndBlock attackScript;
-    public Transform target;
+    public GameObject enemy;
+
     #endregion
 
     // Use this for initialization
@@ -38,20 +40,31 @@ public class PlayerController : MonoBehaviour
         }
         #endregion
         #region Movement
-        rb.velocity = (new Vector3((Input.GetAxisRaw("Horizontal" + attackScript.whichPlayer) * (moveSpeed * 100) * Time.deltaTime + (attackScript.stabPower * (attackScript.stabDir / 90) * 100)) / slowdownSpeed, rb.velocity.y, 0));
+        rb.velocity = (new Vector3((Input.GetAxisRaw("Horizontal" + attackScript.whichPlayer) * (moveSpeed * 100)) * Time.deltaTime / slowdownSpeed, rb.velocity.y, 0));
         if (Input.GetButton("Jump" + attackScript.whichPlayer) && grounded)
         {
             rb.velocity = (new Vector3(rb.velocity.x, (jumpHeight * 100) * Time.deltaTime, 0));
         }
         #endregion
         if (transform.position.y < -10) { transform.position = spawnPoint; }
-        transform.LookAt(new Vector3(target.position.x, transform.position.y, 0));
+        transform.LookAt(new Vector3(enemy.transform.position.x, transform.position.y, 0));
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.name == "StabCol" && other.tag ==target.tag)
+        if (other.name == "StabCol" && other.tag == enemy.transform.tag && !attackScript.isBlocking)
         {
-            transform.position = new Vector3 (15,2,0);
+            Debug.Log("Player "+attackScript.whichPlayer+": has Died!");
+            transform.position = new Vector3(100, 10,0);
+        }
+        if (other.name == "StabCol" && other.tag == enemy.transform.tag && attackScript.isBlocking)
+        {
+            Vector3 knockBackDirection =  (transform.position  - enemy.transform.position).normalized;
+            enemy.GetComponent<Rigidbody>().AddForce(new Vector3(knockBackDirection.x,0,0) * -knockbackForce, ForceMode.Impulse);
+        }
+        if (other.name == "SwipeCol" && other.tag == enemy.transform.tag)
+        {
+            attackScript.isBlocking = false;
+            attackScript.blockTimer = attackScript.maxBlockTimer;
         }
     }
 }

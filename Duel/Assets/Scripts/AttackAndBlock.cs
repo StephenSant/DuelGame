@@ -6,16 +6,19 @@ public class AttackAndBlock : MonoBehaviour
 {
     #region Variables
     public PlayerController player;
+    public GameObject enemy;
     public int whichPlayer;
     [Header("Stab")]
     public GameObject stabCol;
-    public float stabForce = 10;
+    public float stabForce = 40;
     public float stabSlowdown;
     public float stabPower;
     public float stabDir;
     [Header("Block")]
     public GameObject blockCol;
+    public bool isBlocking;
     public float blockSpeed = 2;
+    public float blockTimer, maxBlockTimer = 5;
     [Header("Swipe")]
     public GameObject swipeCol;
 
@@ -26,24 +29,28 @@ public class AttackAndBlock : MonoBehaviour
     void Start()
     {
         player = GetComponent<PlayerController>();
+        enemy = player.enemy;
         stabCol = GameObject.Find("StabCol");
         blockCol = GameObject.Find("BlockCol");
         swipeCol = GameObject.Find("SwipeCol");
         stabCol.active = false;
         blockCol.active = false;
         swipeCol.active = false;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        blockTimer -= Time.deltaTime;
         #region Stab
-        if (Input.GetButtonDown("Stab" + whichPlayer) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.Mouse0))
+        Vector3 towardsEnemy = (transform.position - enemy.transform.position).normalized;
+        if (Input.GetButtonDown("Stab" + whichPlayer) && !Input.GetButton("Block" + whichPlayer) && !Input.GetButton("Swipe" + whichPlayer))
         {
             stabCol.active = true;
             stabPower = stabForce;
             stabDir = transform.rotation.y;
-            
+            GetComponent<Rigidbody>().AddForce(new Vector3(towardsEnemy.x,0,0) * -stabForce, ForceMode.Impulse);
         }
         stabPower -= stabSlowdown;
         if (stabPower < 0)
@@ -53,19 +60,27 @@ public class AttackAndBlock : MonoBehaviour
         }
         #endregion
         #region Block
-        if (Input.GetButton("Block" + whichPlayer) && stabPower <= 0)
+        if (Input.GetButton("Block" + whichPlayer) && stabPower <= 0 && blockTimer < 0)
         {
-            blockCol.active = true;
-            player.slowdownSpeed = blockSpeed;
+            isBlocking = true;
+        }
+        else
+        {
+            isBlocking = false;
+        }
+        if (isBlocking)
+        {
+            Block();
         }
         else
         {
             blockCol.active = false;
             player.slowdownSpeed = 1;
+            
         }
         #endregion
         #region Swipe
-        if (Input.GetButtonDown("Swipe" + whichPlayer) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.Mouse1))
+        if (Input.GetButtonDown("Swipe" + whichPlayer) && !Input.GetButton("Stab" + whichPlayer) && !Input.GetButton("Block" + whichPlayer))
         {
             swipeCol.active = true;
         }
@@ -74,5 +89,10 @@ public class AttackAndBlock : MonoBehaviour
             swipeCol.active = false;
         }
         #endregion
+    }
+    void Block()
+    {
+        blockCol.active = true;
+        player.slowdownSpeed = blockSpeed;
     }
 }
