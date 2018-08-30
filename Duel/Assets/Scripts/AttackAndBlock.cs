@@ -8,17 +8,19 @@ public class AttackAndBlock : MonoBehaviour
     public PlayerController player;
     public GameObject enemy;
     public int whichPlayer;
+
     [Header("Stab")]
     public GameObject stabCol;
     public float stabForce = 40;
-    public float stabSlowdown;
-    public float stabPower;
-    public float stabDir;
+    public float startStabTime;
+    public float stabTimer;
+
     [Header("Block")]
     public GameObject blockCol;
     public bool isBlocking;
     public float blockSpeed = 2;
     public float blockTimer, maxBlockTimer = 5;
+
     [Header("Swipe")]
     public GameObject swipeCol;
 
@@ -36,31 +38,31 @@ public class AttackAndBlock : MonoBehaviour
         stabCol.active = false;
         blockCol.active = false;
         swipeCol.active = false;
-        
     }
 
     // Update is called once per frame
     void Update()
     {
         blockTimer -= Time.deltaTime;
+        stabTimer -= Time.deltaTime;
         #region Stab
-        Vector3 towardsEnemy = (transform.position - enemy.transform.position).normalized;
-        if (Input.GetButtonDown("Stab" + whichPlayer) && !Input.GetButton("Block" + whichPlayer) && !Input.GetButton("Swipe" + whichPlayer))
+        if (Input.GetButtonDown("Stab" + whichPlayer))
+        {
+            stabTimer = startStabTime;
+        }
+        if (Input.GetButton("Stab" + whichPlayer) && stabTimer > 0 && !Input.GetButton("Block" + whichPlayer) && !Input.GetButton("Swipe" + whichPlayer))
         {
             stabCol.active = true;
-            stabPower = 10;
-            stabDir = transform.rotation.y;
-            GetComponent<Rigidbody>().AddForce(new Vector3(towardsEnemy.x,0,0) * -stabForce, ForceMode.Impulse);
+            GetComponent<Rigidbody>().velocity = (new Vector3((transform.rotation.y/90) * stabForce, GetComponent<Rigidbody>().velocity.y,0));
         }
-        stabPower -= stabSlowdown;
-        if (stabPower < 0)
+        else
         {
-            stabPower = 0;
             stabCol.active = false;
+            GetComponent<Rigidbody>().velocity = (new Vector3(0, GetComponent<Rigidbody>().velocity.y, 0));
         }
         #endregion
         #region Block
-        if (Input.GetButton("Block" + whichPlayer) && stabPower <= 0 && blockTimer < 0)
+        if (Input.GetButton("Block" + whichPlayer) && !Input.GetButton("Stab" + whichPlayer) && blockTimer < 0)
         {
             isBlocking = true;
         }
@@ -76,7 +78,7 @@ public class AttackAndBlock : MonoBehaviour
         {
             blockCol.active = false;
             player.slowdownSpeed = 1;
-            
+
         }
         #endregion
         #region Swipe
