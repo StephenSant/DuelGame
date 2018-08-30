@@ -66,5 +66,9 @@ public class PlayerController : MonoBehaviour
             attackScript.isBlocking = false;
             attackScript.blockTimer = attackScript.maxBlockTimer;
         }
+        if (other.tag == "Enviroment")
+        {
+            transform.position = new Vector3(100, 10, 0);
+        }
     }
 }

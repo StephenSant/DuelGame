@@ -48,7 +48,7 @@ public class AttackAndBlock : MonoBehaviour
         if (Input.GetButtonDown("Stab" + whichPlayer) && !Input.GetButton("Block" + whichPlayer) && !Input.GetButton("Swipe" + whichPlayer))
         {
             stabCol.active = true;
-            stabPower = stabForce;
+            stabPower = 10;
             stabDir = transform.rotation.y;
             GetComponent<Rigidbody>().AddForce(new Vector3(towardsEnemy.x,0,0) * -stabForce, ForceMode.Impulse);
         }
