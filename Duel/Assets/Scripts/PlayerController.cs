@@ -53,36 +53,37 @@ public class PlayerController : MonoBehaviour
     {
         if (other.name == "StabCol" && other.tag == enemy.transform.tag && !attackScript.isBlocking)
         {
-            Debug.Log("Player "+attackScript.whichPlayer+": has Died!");
-            transform.position = new Vector3(100, 10,0);
+            Debug.Log("Player " + attackScript.whichPlayer + ": has Died!");
+            transform.position = new Vector3(100, 10, 0);
         }
         if (other.name == "StabCol" && other.tag == enemy.transform.tag && attackScript.isBlocking)
         {
-            Vector3 knockBackDirection =  (transform.position  - enemy.transform.position).normalized;
-            enemy.GetComponent<Rigidbody>().AddForce(new Vector3(knockBackDirection.x,0,0) * -knockbackForce, ForceMode.Impulse);
+            Vector3 knockBackDirection = (transform.position - enemy.transform.position).normalized;
+            enemy.GetComponent<Rigidbody>().AddForce(new Vector3(knockBackDirection.x, 0, 0) * -knockbackForce, ForceMode.Impulse);
         }
         if (other.name == "SwipeCol" && other.tag == enemy.transform.tag)
         {
             attackScript.isBlocking = false;
             attackScript.blockTimer = attackScript.maxBlockTimer;
         }
-<<<<<<< HEAD
+
         if (other.tag == "Enviroment")
         {
             transform.position = new Vector3(100, 10, 0);
-=======
-        if (other.gameObject.tag == "Platform")
-        {
-            transform.parent = other.transform;
-        }
-    }
 
+            if (other.gameObject.tag == "Platform")
+            {
+                transform.parent = other.transform;
+            }
+        }
+
+
+    }
     void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "Platform")
         {
             transform.parent = null;
->>>>>>> 32c011b76f493ec42e8fa32d26d25674c15b7a06
         }
     }
 }
