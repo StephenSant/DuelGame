@@ -66,9 +66,23 @@ public class PlayerController : MonoBehaviour
             attackScript.isBlocking = false;
             attackScript.blockTimer = attackScript.maxBlockTimer;
         }
+<<<<<<< HEAD
         if (other.tag == "Enviroment")
         {
             transform.position = new Vector3(100, 10, 0);
+=======
+        if (other.gameObject.tag == "Platform")
+        {
+            transform.parent = other.transform;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Platform")
+        {
+            transform.parent = null;
+>>>>>>> 32c011b76f493ec42e8fa32d26d25674c15b7a06
         }
     }
 }

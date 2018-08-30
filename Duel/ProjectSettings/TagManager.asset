@@ -6,7 +6,11 @@ TagManager:
   tags:
   - Player1
   - Player2
+<<<<<<< HEAD
   - Enviroment
+=======
+  - Platform
+>>>>>>> 32c011b76f493ec42e8fa32d26d25674c15b7a06
   layers:
   - Default
   - TransparentFX
