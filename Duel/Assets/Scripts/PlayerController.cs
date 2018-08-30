@@ -54,17 +54,17 @@ public class PlayerController : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.name == "StabCol" && other.tag == enemy.transform.tag && !attackScript.isBlocking)
+        if (other.tag == "StabCol" && !attackScript.isBlocking)
         {
             Debug.Log("Player " + attackScript.whichPlayer + ": has Died!");
             transform.position = new Vector3(100, 10, 0);
         }
-        if (other.name == "StabCol" && other.tag == enemy.transform.tag && attackScript.isBlocking)
+        if (other.tag == "BlockCol" && attackScript.isBlocking)
         {
             Vector3 knockBackDirection = (transform.position - enemy.transform.position).normalized;
             enemy.GetComponent<Rigidbody>().AddForce(new Vector3(knockBackDirection.x, 0, 0) * -knockbackForce, ForceMode.Impulse);
         }
-        if (other.name == "SwipeCol" && other.tag == enemy.transform.tag)
+        if (other.tag == "SwipeCol")
         {
             attackScript.isBlocking = false;
             attackScript.blockTimer = attackScript.maxBlockTimer;
@@ -74,10 +74,11 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = new Vector3(100, 10, 0);
 
-            if (other.gameObject.tag == "Platform")
-            {
-                transform.parent = other.transform;
-            }
+
+        }
+        if (other.gameObject.tag == "Platform")
+        {
+            transform.parent = other.transform;
         }
 
 

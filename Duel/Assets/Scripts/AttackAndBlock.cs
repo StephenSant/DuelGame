@@ -32,9 +32,9 @@ public class AttackAndBlock : MonoBehaviour
     {
         player = GetComponent<PlayerController>();
         enemy = player.enemy;
-        stabCol = GameObject.Find("StabCol");
-        blockCol = GameObject.Find("BlockCol");
-        swipeCol = GameObject.Find("SwipeCol");
+        stabCol = GameObject.Find("StabCol" + whichPlayer);
+        blockCol = GameObject.Find("BlockCol" + whichPlayer);
+        swipeCol = GameObject.Find("SwipeCol" + whichPlayer);
         stabCol.active = false;
         blockCol.active = false;
         swipeCol.active = false;
