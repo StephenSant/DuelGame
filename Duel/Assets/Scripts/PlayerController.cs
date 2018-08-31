@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     #region Variables
+    public ScoreManager scoreManager;
     [Header("Movement")]
     public float moveSpeed = 2.5f;
     public float jumpHeight = 4;
@@ -58,6 +59,12 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Player " + attackScript.whichPlayer + ": has Died!");
             transform.position = new Vector3(100, 10, 0);
+            if (attackScript.whichPlayer == 1)
+            { scoreManager.score2++; }
+            if (attackScript.whichPlayer == 2)
+            { scoreManager.score1++; }
+            Debug.Log("Score: " + scoreManager.score1 + " - " + scoreManager.score2);
+
         }
         if (other.tag == "BlockCol" && attackScript.isBlocking)
         {
