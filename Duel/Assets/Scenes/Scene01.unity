@@ -162,11 +162,6 @@ Prefab:
       propertyPath: enemy
       value: 
       objectReference: {fileID: 2093788379}
-    - target: {fileID: 114448855703873114, guid: 734deb204d27e6f44993ed97e56d0d7a,
-        type: 2}
-      propertyPath: scoreManager
-      value: 
-      objectReference: {fileID: 746273111}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 734deb204d27e6f44993ed97e56d0d7a, type: 2}
   m_IsPrefabAsset: 0
@@ -256,11 +251,6 @@ Prefab:
       propertyPath: enemy
       value: 
       objectReference: {fileID: 462786275}
-    - target: {fileID: 114499864378554480, guid: 0da1950294bb1ab44acd59c4241e4d95,
-        type: 2}
-      propertyPath: scoreManager
-      value: 
-      objectReference: {fileID: 746273111}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0da1950294bb1ab44acd59c4241e4d95, type: 2}
   m_IsPrefabAsset: 0
